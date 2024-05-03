@@ -51,7 +51,7 @@ const ForgetPassword = ({navigation}) => {
       };
 
       fetch(
-        'https://www.globalsleep.backend.redflameuae.com/api/forgotPassword/otp/send',
+        'https://autopro-8b0e6a59b81e.herokuapp.com/v1/customer/sendEmail',
         requestOptions,
       )
         .then(response => response.text())
@@ -65,7 +65,7 @@ const ForgetPassword = ({navigation}) => {
             Toast.show({
               type: ALERT_TYPE.SUCCESS,
               title: 'Success',
-              textBody: data.messages[0],
+              textBody: data.message,
               autoClose: 1500,
             });
 
@@ -74,7 +74,7 @@ const ForgetPassword = ({navigation}) => {
             Toast.show({
               type: ALERT_TYPE.DANGER,
               title: 'Error',
-              textBody: data.messages[0],
+              textBody: data.message,
               autoClose: 1500,
             });
 
@@ -82,26 +82,6 @@ const ForgetPassword = ({navigation}) => {
           }
         })
         .catch(error => console.log('error', error));
-      //   var myHeaders = new Headers();
-      //   myHeaders.append('email', email);
-
-      //   var formdata = new FormData();
-      //   formdata.append('email', email);
-
-      //   var requestOptions = {
-      //     method: 'POST',
-      //     headers: myHeaders,
-      //     body: formdata,
-      //     redirect: 'follow',
-      //   };
-      //   setShowindicator(true);
-      //   fetch(
-      //     'http://164.92.224.155:4545/api/forgetPassword/otp/send',
-      //     requestOptions,
-      //   )
-      //     .then(response => response.text())
-
-      //     .catch(error => console.log('error', error));
     }
   };
 
@@ -147,7 +127,7 @@ const ForgetPassword = ({navigation}) => {
           />
         </View>
         <View style={{marginTop: 40}}>
-          <Button title={'Send'} onPress={() => navigation.replace('verification', {email: email})} />
+          <Button title={'Send'} onPress={() => handleforget()} />
         </View>
       </View>
     </View>

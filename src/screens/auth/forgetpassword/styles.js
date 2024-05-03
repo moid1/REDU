@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     flex: 1,
-    backgroundColor: Theme.colors.whiteColor,
+    backgroundColor: Theme.colors.bgColor,
   },
   headerContainer: {
     height: 70,
@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
   txt1: {
     fontSize: 20,
     fontFamily: Theme.fontFamily.semibold,
-    color: 'black',
+    color: 'white',
     alignSelf: 'center',
     // fontWeight: '700',
   },
   txt2: {
     fontSize: 14,
     fontFamily: Theme.fontFamily.medium,
-    color: Theme.colors.txtColor2,
+    color: '#A6A6A6',
     paddingTop: 20,
     textAlign: 'center',
     width: '100%',

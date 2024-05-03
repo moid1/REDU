@@ -10,8 +10,13 @@ import {
 } from 'react-native';
 import Theme from '../../../Theme/Theme';
 import {Icon} from '@rneui/themed';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home = ({navigation}) => {
+  const [allNews,setAllNews]=useState([]);
+  useFocusEffect(React.useCallback(()=>{
+
+  },[]))
   return (
     <View style={{flex: 1, backgroundColor: Theme.colors.bgColor}}>
       <StatusBar

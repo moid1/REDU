@@ -59,8 +59,6 @@ const ResetPassword = ({navigation, route}) => {
       var raw = JSON.stringify({
         email: email1,
         password: password,
-        password_confirmation: confirmpassword,
-        otp: otp,
       });
 
       var requestOptions = {
@@ -71,7 +69,7 @@ const ResetPassword = ({navigation, route}) => {
       };
       setShowindicator(true);
       fetch(
-        'https://www.globalsleep.backend.redflameuae.com/api/password/change',
+        'https://autopro-8b0e6a59b81e.herokuapp.com/user/changePassword',
         requestOptions,
       )
         .then(response => response.text())
@@ -83,7 +81,7 @@ const ResetPassword = ({navigation, route}) => {
             Toast.show({
               type: ALERT_TYPE.SUCCESS,
               title: 'Succes',
-              textBody: data.messages[0],
+              textBody: data.message,
               autoClose: 1500,
             });
             navigation.replace('signin');
@@ -91,7 +89,7 @@ const ResetPassword = ({navigation, route}) => {
             Toast.show({
               type: ALERT_TYPE.DANGER,
               title: 'Error',
-              textBody: data.messages[0],
+              textBody: data.message,
               autoClose: 1500,
             });
           }
@@ -152,7 +150,7 @@ const ResetPassword = ({navigation, route}) => {
           />
         </View>
         <View style={{marginTop: 40}}>
-          <Button title={'Reset'} onPress={() =>   navigation.replace('signin')} />
+          <Button title={'Reset'} onPress={() =>  handleforget()} />
         </View>
       </View>
     </View>

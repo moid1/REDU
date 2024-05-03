@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
 
   body: {
     width: '100%',
-    paddingHorizontal: '5%',
-    marginTop: '5%',
+    paddingHorizontal: '2.5%',
+    marginTop: '5%',width:width,
   },
   upparcontainer: {
     // backgroundColor: Theme.colors.whiteColor,
@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
     color: "#D21B03",
     fontSize: 48,
     fontFamily: Theme.fontFamily.bold,
- alignSelf:"center",
+    textAlign:"center",marginHorizontal:(width / 100) * 5,
+    width: (width / 100) * 90,
   },
   providertxt: {
     color: Theme.colors.grayColor,

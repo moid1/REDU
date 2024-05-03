@@ -12,7 +12,7 @@ const MainNav = () => {
     <NavigationContainer>
       <StatusBar barStyle="light-content" backgroundColor={Theme.colors.primaryColor
       } />
-      <Stack.Navigator initialRouteName={stackNavigationList[0].name}>
+      <Stack.Navigator >
         {stackNavigationList.map((item, index) => {
           return (
             <Stack.Screen

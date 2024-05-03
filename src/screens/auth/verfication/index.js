@@ -31,7 +31,7 @@ const Verification = ({navigation, route}) => {
   const emaildata = route.params.email;
   // console.log('email data--', emaildata);
   const [showindicator, setShowindicator] = useState(false);
-  const CELL_COUNT = 4;
+  const CELL_COUNT = 5;
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -49,22 +49,23 @@ const Verification = ({navigation, route}) => {
       });
     } else {
       var myHeaders = new Headers();
-      myHeaders.append('otp', value);
-      myHeaders.append('email', emaildata);
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
 
-      var formdata = new FormData();
-      formdata.append('otp', value);
-      formdata.append('email', emaildata);
+      var raw = JSON.stringify({
+        email: emaildata,
+        otp: value,
+      });
 
       var requestOptions = {
         method: 'POST',
-        // headers: myHeaders,
-        body: formdata,
+        headers: myHeaders,
+        body: raw,
         redirect: 'follow',
       };
       setShowindicator(true);
       fetch(
-        'https://www.globalsleep.backend.redflameuae.com/api/forgotPassword/otp/verify',
+        'https://autopro-8b0e6a59b81e.herokuapp.com/user/verifyOtp',
         requestOptions,
       )
         .then(response => response.text())
@@ -77,15 +78,15 @@ const Verification = ({navigation, route}) => {
             Toast.show({
               type: ALERT_TYPE.SUCCESS,
               title: 'success',
-              textBody: data.messages[0],
+              textBody: data?.message,
               autoClose: 1500,
             });
-            navigation.replace('reset', {email: emaildata, otp: value});
+            navigation.replace('reset', {email: emaildata});
           } else {
             Toast.show({
               type: ALERT_TYPE.DANGER,
               title: 'Error',
-              textBody: data.messages[0],
+              textBody: data?.message,
               autoClose: 1500,
             });
 
@@ -95,49 +96,7 @@ const Verification = ({navigation, route}) => {
         .catch(error => console.log('error', error));
     }
   };
-  const resendOTP = () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Accept', 'application/json');
-    myHeaders.append('Content-Type', 'application/json');
-
-    var raw = JSON.stringify({
-      email: emaildata,
-    });
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch(
-      'https://www.globalsleep.backend.redflameuae.com/api/forgotPassword/otp/send',
-      requestOptions,
-    )
-      .then(response => response.text())
-      .then(result => {
-        // console.log(result);
-        const data = JSON.parse(result);
-        if (data.status === 'success') {
-          Toast.show({
-            type: ALERT_TYPE.SUCCESS,
-            title: 'Success',
-            textBody: data.messages[0],
-            autoClose: 1500,
-          });
-        } else {
-          Toast.show({
-            type: ALERT_TYPE.DANGER,
-            title: 'Error',
-            textBody: data.messages[0],
-            autoClose: 1500,
-          });
-        }
-      })
-      .catch(error => console.log('error', error));
-    // console.log(result)
-  };
+ 
 
   return (
     <View style={styles.maincontainer}>
@@ -198,7 +157,7 @@ const Verification = ({navigation, route}) => {
           </Text>
         </View>
         <View style={{marginTop: 40}}>
-          <Button title={'Verify'} onPress={() => navigation.replace('reset', {email: emaildata, otp: value})} />
+          <Button title={'Verify'} onPress={() => handleforget()} />
         </View>
       </View>
     </View>

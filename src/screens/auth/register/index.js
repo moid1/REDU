@@ -29,7 +29,7 @@ const Register = ({navigation, route}) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handlesignin = () => {
+  const registerUser = async () => {
     if (!email) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
@@ -37,16 +37,60 @@ const Register = ({navigation, route}) => {
         textBody: 'Please enter email',
         autoClose: 1500,
       });
-    } else if (!password) {
+    }  else if (!password) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
         title: 'Error',
         textBody: 'Please Enter Password!',
         autoClose: 1500,
       });
-    } else {
-      Keyboard.dismiss();
-      navigation.replace('home');
+    }  else {
+      const myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      setShowindicator(true);
+      const raw = JSON.stringify({
+       
+        email: email,
+        password: password,
+      
+      });
+
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      };
+
+      fetch('https://autopro-8b0e6a59b81e.herokuapp.com/user/register', requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          setShowindicator(false);
+
+          // console.log(result)
+          const data = JSON.parse(result);
+          if (data?.status === 'success') {
+            dispatch({
+              type: types.LOGIN.success,
+              payload: data?.data,
+            });
+            Toast.show({
+              type: ALERT_TYPE.SUCCESS,
+              title: 'Success',
+              textBody: data?.message,
+              autoClose: 1500,
+            });
+            navigation.navigate('home');
+          }else{
+            Toast.show({
+              type: ALERT_TYPE.DANGER,
+              title: 'Error',
+              textBody: data?.message,
+              autoClose: 1500,
+            });
+          }
+        })
+        .catch(error => console.error(error));
     }
   };
 
@@ -66,7 +110,7 @@ const Register = ({navigation, route}) => {
             fontFamily: Theme.fontFamily.regular,
             textAlign: 'center',
           }}>
-          Real estate Development University
+          Real Estate Development University
         </Text>
 
         <View style={styles.body}>
@@ -97,7 +141,7 @@ const Register = ({navigation, route}) => {
             </Text> */}
           </View>
           <View style={styles.btn}>
-            <Button title={'Sign Up'} onPress={() => handlesignin()} />
+            <Button title={'Sign Up'} onPress={() => registerUser()} />
           </View>
 
           <Text

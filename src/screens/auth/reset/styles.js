@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     flex: 1,
-    backgroundColor: Theme.colors.whiteColor,
+    backgroundColor: Theme.colors.bgColor,
     // paddingTop: 20,
   },
   headerContainer: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   txt1: {
     fontSize: 20,
     fontFamily: Theme.fontFamily.medium,
-    color: 'black',
+    color: 'white',
     alignSelf: 'center',
     // fontWeight: '700',
   },

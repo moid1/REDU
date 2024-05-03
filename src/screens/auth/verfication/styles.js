@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     flex: 1,
-    backgroundColor: Theme.colors.whiteColor,
+    backgroundColor: Theme.colors.bgColor,
     // paddingTop: 20,
   },
   headerContainer: {
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     lineHeight: 38,
     fontSize: 24,
     paddingTop: 10,
-    backgroundColor: '#F5F5F5',
-
+   
+borderWidth:1,borderColor:'#F5F5F5',
     color: '#979797',
 
     textAlign: 'center',
@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 20,
     fontFamily: Theme.fontFamily.semibold,
-    color: 'black',
+    color: 'white',
     // fontWeight: '700',
   },
   txt2: {
     fontSize: 15,
     fontFamily: Theme.fontFamily.medium,
-    color: Theme.colors.txtColor2,
+    color: '#A6A6A6',
     paddingTop: 5,
     textAlign: 'center',
     marginTop: 10,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   botomtxt: {
-    color: 'black',
+    color: 'white',
     fontSize: 15,
     fontFamily: Theme.fontFamily.medium,
   },
